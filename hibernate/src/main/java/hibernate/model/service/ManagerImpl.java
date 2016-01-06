@@ -57,5 +57,13 @@ public class ManagerImpl implements Manager {
         return id;
     }
 
+    @Override
+    public void edit(Person p, String name, String lastname) {
+        p = (Person) sf.getCurrentSession().get(Person.class, p.getId());
+        p.setFirstName(name);
+        p.setLastName(lastname);
+        sf.getCurrentSession().update(p);
+    }
+
 
 }
