@@ -97,5 +97,23 @@ public class ManagerImpl implements Manager {
     }
 
 
-  
+    @Override
+    public List<Cure> findCures(Person p){
+        List<Cure> allCures = getAllCures();
+        List<Cure> cures = new ArrayList<Cure>();
+        for (Cure c : allCures)
+            if(c.getPerson().getId() == p.getId())
+                cures.add(c);
+        return cures;
+    }
+
+    @Override
+    public void deleteDependencies(Person p){
+        List<Cure> allCures = getAllCures();
+        for (Cure c : allCures)
+        {
+            if(c.getPerson().getId() == p.getId())
+                delete(c);
+        }
+    }
 }
