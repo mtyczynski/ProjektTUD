@@ -65,5 +65,37 @@ public class ManagerImpl implements Manager {
         sf.getCurrentSession().update(p);
     }
 
+    @Override
+    public void edit(Cure cure, Person person, String name, String desc) {
+        cure = (Cure) sf.getCurrentSession().get(Cure.class, cure.getId());
+        Person p = (Person) sf.getCurrentSession().get(Person.class, cure.getPerson().getId());
+        int i = 0;
+        for(Cure c : p.getCures()) {
+            if (c == cure)
+                break;
+            i++;
+        }
+        cure.setPerson(person);
+        cure.setCureName(name);
+        cure.setDescription(desc);
+        p.getCures().set(i, cure);
+        sf.getCurrentSession().update(cure);
+    }
 
+    @Override
+    public void delete(Cure c) {
+        c = (Cure) sf.getCurrentSession().get(Cure.class, c.getId());
+        Person p = (Person) sf.getCurrentSession().get(Person.class, c.getPerson().getId());
+        p.getCures().remove(c);
+        sf.getCurrentSession().delete(c);
+    }
+
+    @Override
+    public void delete(Person p) {
+        p = (Person) sf.getCurrentSession().get(Person.class, p.getId());
+        sf.getCurrentSession().delete(p);
+    }
+
+
+  
 }
