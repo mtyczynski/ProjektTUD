@@ -149,5 +149,77 @@ public class ManagerTest {
         assertEquals(lname2, p1.getLastName());
     }
 
+    @Test
+    public void deleteChecker() {
 
+        Person p = new Person();
+        p.setFirstName(fname1);
+        p.setLastName(lname1);
+        Cure c = new Cure();
+        c.setPerson(p);
+        c.setCureName(cure1);
+        c.setDescription(desc1);
+
+        Long newPersonID = manager.add(p);
+        Long newCureID = manager.add(c);
+
+        List<Cure> allCures = manager.getAllCures();
+        List<Person> allPersons = manager.getAllPersons();
+
+        manager.delete(c);
+        manager.delete(p);
+
+        List<Cure> allCures2 = manager.getAllCures();
+        List<Person> allPersons2 = manager.getAllPersons();
+
+        assertEquals(allCures2.size(), allCures.size() - 1);
+        assertEquals(allPersons2.size(), allPersons.size()-1);
+        assertNull(manager.getCureFromID(newCureID));
+        assertNull(manager.getPersonFromID(newPersonID));
+    }
+
+    @Test
+    public void checkFindCures() {
+
+
+        Person p1 = new Person();
+        p1.setFirstName(fname1);
+        p1.setLastName(lname1);
+
+        manager.add(p1);
+
+        Cure c1 = new Cure();
+        c1.setPerson(p1);
+        c1.setCureName(cure1);
+        c1.setDescription(desc1);
+        Long i;
+        i = manager.add(c1);
+
+        List<Cure> foundCures = manager.findCures(p1);
+
+        assertEquals(foundCures.size(), 1);
+    }
+
+    @Test
+    public void checkDelDependancies() {
+
+        Person p1 = new Person();
+        p1.setFirstName(fname1);
+        p1.setLastName(lname1);
+
+        manager.add(p1);
+
+        Cure c1 = new Cure();
+        c1.setPerson(p1);
+        c1.setCureName(cure1);
+        c1.setDescription(desc1);
+
+        Long idcure1 = manager.add(c1);
+
+        manager.deleteDependencies(p1);
+
+        c1 = manager.getCureFromID(idcure1);
+
+        assertNull(c1.getPerson());
+    }
 }
