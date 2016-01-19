@@ -200,26 +200,4 @@ public class ManagerTest {
         assertEquals(foundCures.size(), 1);
     }
 
-    @Test
-    public void checkDelDependancies() {
-
-        Person p1 = new Person();
-        p1.setFirstName(fname1);
-        p1.setLastName(lname1);
-
-        manager.add(p1);
-
-        Cure c1 = new Cure();
-        c1.setPerson(p1);
-        c1.setCureName(cure1);
-        c1.setDescription(desc1);
-
-        Long idcure1 = manager.add(c1);
-
-        manager.deleteDependencies(p1);
-
-        c1 = manager.getCureFromID(idcure1);
-
-        assertNull(c1.getPerson());
-    }
 }

@@ -22,7 +22,7 @@ public class Cure implements java.io.Serializable{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_person", nullable = false)
+    @JoinColumn(name = "id_person",  nullable = false)
     public Person getPerson() {
         return person;
     }
