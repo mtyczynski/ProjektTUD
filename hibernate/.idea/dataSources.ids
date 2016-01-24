@@ -6,5 +6,19 @@
     </database-info>
     <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact"/>
     <schema name="PUBLIC" catalog="PUBLIC"/>
+    <table name="CURE" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
+      <column name="ID" sqlType="BIGINT" precision="64" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="CURENAME" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DESCRIPTION" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="ID_PERSON" sqlType="BIGINT" precision="64" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="SYS_PK_10092" columns="ID"/>
+      <foreign-key name="FK203A45DBAE10CA" columns="ID_PERSON" ref-table="PERSON" ref-schema="PUBLIC" ref-catalog="PUBLIC" ref-columns="ID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="PERSON" schema="PUBLIC" catalog="PUBLIC" type="TABLE">
+      <column name="ID" sqlType="BIGINT" precision="64" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="FIRSTNAME" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="LASTNAME" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="SYS_PK_10100" columns="ID"/>
+    </table>
   </data-source>
 </component>

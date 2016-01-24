@@ -142,6 +142,8 @@ public class ManagerTest {
 
         manager.edit(p, fname2, lname2);
         manager.edit(c, p, cure2, desc2);
+         c1 = manager.getCureFromID(newCureID);
+         p1 = manager.getPersonFromID(newPersonID);
 
         assertEquals(cure2, c1.getCureName());
         assertEquals(desc2, c1.getDescription());
@@ -192,8 +194,7 @@ public class ManagerTest {
         c1.setPerson(p1);
         c1.setCureName(cure1);
         c1.setDescription(desc1);
-        Long i;
-        i = manager.add(c1);
+        manager.add(c1);
 
         List<Cure> foundCures = manager.findCures(p1);
 
